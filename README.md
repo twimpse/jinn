@@ -1,3 +1,3 @@
 # jinn - The ghost demon daemon
-Hidden file storage, JIT execution, data scan prevention.
+Volitile hidden file storage, JIT execution, data scan prevention.
 
