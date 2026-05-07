@@ -160,3 +160,91 @@ int exec_shellcode(const char *code, size_t code_size)
       return WIFEXITED(status) ? WEXITSTATUS(status) : 1;
     }
 }
+
+
+struct exec_true_perm_result {
+    int checked;
+    int return_code;
+};
+
+struct exec_true_perm_result check_exec_true_cache(int location) {
+    static struct {
+        int loc;
+        int return_code;
+    } cache[10];
+    static int cache_count = 0;
+    
+    for (int i = 0; i < cache_count; i++) {
+        if (cache[i].loc == location) {
+            struct exec_true_perm_result res = {1, cache[i].return_code};
+            return res;
+        }
+    }
+    
+    int rc = exec_program_extern_true(location);
+    
+    if (cache_count < 10) {
+        cache[cache_count].loc = location;
+        cache[cache_count].return_code = rc;
+        cache_count++;
+    }
+    
+    struct exec_true_perm_result res = {1, rc};
+    return res;
+}
+
+struct exec_true_perm_result result;
+int selected_location = -1;
+int final_return_code = -1;
+
+for (int loc = 0; loc <= 4; loc++) {
+    result = check_exec_true_cache(loc);
+    
+    if (result.return_code == 0) {
+        selected_location = loc;
+        final_return_code = 0;
+        break;  // found working location
+    }
+    else if (result.return_code == 1) {
+        // Program executed but returned false (not writable/executable)
+        continue;
+    }
+    else {
+        // Error codes 2-7: mkstemp failed, write failed, chmod failed, fork failed, etc.
+        final_return_code = result.return_code;
+        // Continue checking other locations
+    }
+}
+
+if (selected_location != -1) {
+    // Found working location with return_code == 0
+    // Use selected_location
+}
+else if (final_return_code > 1) {
+    // All locations had errors, final_return_code holds last error
+}
+// else: All locations returned 1 (not writable/executable)
+
+int exec_true_get_working_location(void) {
+    static int cached_location = -2;  // -2 = not checked yet
+    
+    if (cached_location == -2) {
+        for (int loc = 0; loc <= 4; loc++) {
+            struct exec_true_perm_result result = check_exec_true_cache(loc);
+            if (result.return_code == 0) {
+                cached_location = loc;
+                break;
+            }
+        }
+        if (cached_location == -2) cached_location = -1;  // none found
+    }
+    
+    return cached_location;
+}
+
+/* Usage
+int exec_true_location = exec_true_get_working_location();
+if (exec_true_location >= 0) {
+    // use loc (0=/tmp, 1=/var/tmp, etc.)
+}
+*/
