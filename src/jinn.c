@@ -109,8 +109,7 @@ int main(int argc, char *argv[])
     {0, 0, 0, 0}
   };
 
-  while ((opt =
-          getopt_long(argc, argv, "GDSCH:rp:Ld", long_options, NULL)) != -1)
+  while ((opt = getopt_long(argc, argv, "GDSCH:rp:Ld", long_options, NULL)) != -1)
     {
       switch (opt)
         {
@@ -152,6 +151,16 @@ int main(int argc, char *argv[])
           printf
             ("Usage: %s [-s] [-c] [-G] [-D] [-S] [-C] [-r] [-H host] [-p port] [-L logpath] [-d|--daemon]\n",
              argv[0]);
+          printf("\t-s\t\tServer mode\n");
+          printf("\t-c\t\tClient mode\n");
+          printf("\t-G\t\tGenie mode\n");
+          printf("\t-D\t\tDatapipe/transparent proxy mode (requires -H (host) -p (port) -L (listen ip) -P (listen port)\n");
+          printf("\t-r\t\tRemote tcp connnect back mode (requires -H -p)\n");
+          printf("\t-H\t\tHost\n");
+          printf("\t-p\t\tport\n");
+          printf("\t-L\t\tListen IP\n");
+          printf("\t-P\t\tlist Port\n");
+
           exit(0);
         default:
           fprintf(stderr, "Unknown option. Use -h for usage.\n");
@@ -175,6 +184,12 @@ int main(int argc, char *argv[])
       fprintf(stderr, "Error: -r requires -H and -p arguments\n");
       exit(1);
     }
+  // Validate remote-specific arguments
+  if (data_flag && (!host || port <= 0))
+    {
+      fprintf(stderr, "Error: -D requires -H,-p,-L, and -P arguments\n");
+      exit(1);
+    }
 
   // Initialize logging if requested
   if (log_flag)
@@ -195,12 +210,12 @@ int main(int argc, char *argv[])
   if (genie_flag)
     {
       genie_mode();
-      return 0;
+      exit 0;
     }
   else if (datapipe_flag)
     {
       datapipe_mode();
-      return 0;
+      exit 0;
     }
   else if (shell_flag)
     {
@@ -213,7 +228,7 @@ int main(int argc, char *argv[])
   else if (remote_flag)
     {
       remote_shell_mode(host, port);
-      return 0;
+      exit 0;
     }
 
   main_loop();
