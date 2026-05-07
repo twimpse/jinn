@@ -1,3 +1,5 @@
+// call jinn_noop_action() for polymorphic no operation. Adds minor delays with random actions. 
+
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
