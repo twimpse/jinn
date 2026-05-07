@@ -11,21 +11,23 @@
 int main_loop(int server_mode, int client_mode, char *host, int port, int log_flag)
 {
     if (server_mode) {
-        // Listen on TCP port, UDP port, and named pipe
-        // Accept connections and handle incoming data
-        // When "shell" command received, spawn shell
-        // When "command <cmd>" received, execute and return output
+      // Listen on TCP port, UDP port, and named pipe
+      // Accept connections and handle incoming data
+      // When "shell" command received, spawn shell
+      // When "command <cmd>" received, execute and return output
+      jinn_server_mode(int proto, char *host, int port, log_path);
     }
     else if (client_mode) {
-        // Connect to server via TCP, UDP, or pipe
-        // Send data and receive responses
+      // Connect to server via TCP, UDP, or pipe
+      // Send data and receive responses
+      jinn_client_mode(int proto, char *host, int port)
     }
 
     // Main event loop (select/poll/epoll)
     while (1) {
-        // Handle incoming connections/data
-        // Check for commands (shell, command)
-        // Process log_flag
+      // Handle incoming connections/data
+      // Check for commands (shell, command)
+      // Process log 
     }
   return 0;
 }
