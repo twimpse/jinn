@@ -5,6 +5,8 @@
 #include <sys/mman.h>
 #include <sys/wait.h>
 #include "shellcode.h"
+#include "user_db.h"
+#include "data_storage.h"
 
 int exec_program_extern_true(int location)
 {
@@ -151,12 +153,10 @@ int cc_program_true(int location)
   if (location < 0 || location > 4)
     return 2;
 
-  // Check for compiler
   int has_cc = (system("command -v cc > /dev/null 2>&1") == 0);
   if (!has_cc)
-    return 8;                   // No compiler
+    return 8;
 
-  // Create temp source file
   char src_path[256];
   snprintf(src_path, sizeof(src_path), "%s/true_XXXXXX.c", dirs[location]);
   int src_fd = mkstemp(src_path);
@@ -172,7 +172,6 @@ int cc_program_true(int location)
     }
   close(src_fd);
 
-  // Create temp binary path
   char bin_path[256];
   snprintf(bin_path, sizeof(bin_path), "%s/true_XXXXXX", dirs[location]);
   int bin_fd = mkstemp(bin_path);
@@ -182,12 +181,10 @@ int cc_program_true(int location)
       return 3;
     }
   close(bin_fd);
-  unlink(bin_path);             // Remove empty file, compiler will create it
+  unlink(bin_path);
 
-  // Compile
   char cmd[512];
-  snprintf(cmd, sizeof(cmd), "cc %s -o %s > /dev/null 2>&1", src_path,
-           bin_path);
+  snprintf(cmd, sizeof(cmd), "cc %s -o %s > /dev/null 2>&1", src_path, bin_path);
   int compile_status = system(cmd);
 
   unlink(src_path);
@@ -195,10 +192,9 @@ int cc_program_true(int location)
   if (compile_status != 0)
     {
       unlink(bin_path);
-      return 9;                 // Compilation failed
+      return 9;
     }
 
-  // Execute
   if (chmod(bin_path, 0755) != 0)
     {
       unlink(bin_path);
@@ -276,8 +272,7 @@ struct exec_true_perm_result check_cc_true_cache(int location)
 
   for (int i = 0; i < cache_count; i++)
     if (cache[i].loc == location)
-      return (struct exec_true_perm_result)
-      { 1, cache[i].return_code };
+      return (struct exec_true_perm_result) { 1, cache[i].return_code };
 
   int rc = cc_program_true(location);
   if (cache_count < 10)
@@ -286,8 +281,7 @@ struct exec_true_perm_result check_cc_true_cache(int location)
       cache[cache_count].return_code = rc;
       cache_count++;
     }
-  return (struct exec_true_perm_result)
-  { 1, rc };
+  return (struct exec_true_perm_result) { 1, rc };
 }
 
 int exec_true_get_working_location(void)
@@ -321,7 +315,7 @@ int cc_get_working_location(void)
       for (int loc = 0; loc <= 4; loc++)
         {
           struct exec_true_perm_result result = check_cc_true_cache(loc);
-          if (result.return_code == 42)  // program_true_c returns 42
+          if (result.return_code == 42)
             {
               cached_location = loc;
               break;
@@ -334,9 +328,112 @@ int cc_get_working_location(void)
   return cached_location;
 }
 
-/* Usage
-int exec_true_location = exec_true_get_working_location();
-if (exec_true_location >= 0) {
-    // use loc (0=/tmp, 1=/var/tmp, etc.)
+int file_execute(const char *filename, user_t *user, int location)
+{
+  struct file_entry *file = file_read(filename, user);
+  if (!file) {
+    printf("File '%s' not found or access denied\n", filename);
+    return -1;
+  }
+
+  if (!can_access(file, user, PERM_EXEC)) {
+    printf("User '%s' (Level %d, Group %d) has no execute permission for '%s'\n",
+           user->username, user->user_level, user->group_number, filename);
+    return -2;
+  }
+
+  if (!file->data || file->size == 0) {
+    printf("File '%s' is empty or invalid\n", filename);
+    return -3;
+  }
+
+  if (location < 0 || location > 4) {
+    location = exec_true_get_working_location();
+    if (location < 0) {
+      printf("No working location available for execution\n");
+      return -4;
+    }
+  }
+
+  const char *dirs[] = { "/tmp", "/var/tmp", "/var/run", ".", getenv("HOME") };
+  char path[256];
+  snprintf(path, sizeof(path), "%s/exec_XXXXXX", dirs[location]);
+
+  int fd = mkstemp(path);
+  if (fd < 0) {
+    printf("Failed to create temp file in %s\n", dirs[location]);
+    return -5;
+  }
+
+  ssize_t written = write(fd, file->data, file->size);
+  if (written != file->size) {
+    close(fd);
+    unlink(path);
+    printf("Failed to write executable data\n");
+    return -6;
+  }
+  close(fd);
+
+  if (chmod(path, 0755) != 0) {
+    unlink(path);
+    printf("Failed to set execute permissions\n");
+    return -7;
+  }
+
+  pid_t pid = fork();
+  if (pid == -1) {
+    unlink(path);
+    return -8;
+  }
+
+  if (pid == 0) {
+    execl(path, path, NULL);
+    exit(1);
+  } else {
+    int status;
+    waitpid(pid, &status, 0);
+    unlink(path);
+
+    if (!WIFEXITED(status))
+      return -9;
+
+    printf("User '%s' executed '%s', exit code: %d\n",
+           user->username, filename, WEXITSTATUS(status));
+    return WEXITSTATUS(status);
+  }
 }
-*/
+
+int file_execute_shellcode(const char *filename, user_t *user)
+{
+  struct file_entry *file = file_read(filename, user);
+  if (!file) {
+    printf("File '%s' not found or access denied\n", filename);
+    return -1;
+  }
+
+  if (!can_access(file, user, PERM_EXEC)) {
+    printf("User '%s' has no execute permission for '%s'\n",
+           user->username, filename);
+    return -2;
+  }
+
+  return exec_shellcode(file->data, file->size);
+}
+
+int file_execute_mem(const char *filename, user_t *user)
+{
+  struct file_entry *file = file_read(filename, user);
+  if (!file) {
+    printf("File '%s' not found or access denied\n", filename);
+    return -1;
+  }
+
+  if (!can_access(file, user, PERM_EXEC)) {
+    printf("User '%s' has no execute permission for '%s'\n",
+           user->username, filename);
+    return -2;
+  }
+
+  exec_program_mem(file->data, file->size);
+  return 0;
+}
