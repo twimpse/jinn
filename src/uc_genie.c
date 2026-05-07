@@ -27,3 +27,17 @@ const char* magic8ball(void) {
     int index = rand() % 20;
     return responses[index];
 }
+
+int genie_mode(){
+  while(1) {
+    // Ask for question input
+    for(int i = 0; i < 25; i++) {
+      delay_random_timing();
+      jinn_noop();
+      delay_random_timing();
+      jinn_junk_inst();
+      delay_random_timing();
+    }
+    magic8ball();
+  }
+}
