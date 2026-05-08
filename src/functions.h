@@ -10,7 +10,6 @@ extern "C" {
 const char* magic8ball(void);
 int client_get_file();
 int client_put_file();
-int exec_true_get_working_location(void);
 int genie_mode();
 int is_debugged(void);
 int mem_alloc_add_file();
@@ -21,16 +20,10 @@ int mem_set_exec();
 int mem_set_nexec();
 int pipe_recv_data();
 int pipe_send_data();
-int pipe_setup();
 int tcp_recv_data();
 int tcp_send_data();
 int udp_recv_data();
 int udp_send_data();
-int user_adduser();
-int user_auth_user();
-int user_deluser();
-int user_set_perm();
-struct exec_true_perm_result check_exec_true_cache(int location);
 void prevent_trace(void);
 
 #ifdef __cplusplus
