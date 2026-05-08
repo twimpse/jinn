@@ -1,5 +1,6 @@
 notes.txt
 todo.txt
 *.bak
-*.*~
+*~
 *.swp
+*.o
