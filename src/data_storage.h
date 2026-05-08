@@ -28,6 +28,7 @@ struct file_entry {
     size_t size;
     time_t created;
     time_t last_access;
+    time_t last_modified;
     unsigned int times_accessed;
     int used;
     struct access_rights access;
