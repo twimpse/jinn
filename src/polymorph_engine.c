@@ -2,6 +2,12 @@
 #include <stdint.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <time.h>
+#include <sys/socket.h>
+
+#ifdef __x86_64__
+#include <x86intrin.h>
+#endif
 
 void jinn_noop(){
 #ifdef __x86_64__
@@ -116,7 +122,7 @@ void jinn_rand_nops(int max_nops) {
 }
 
 // 1. mprotect
-int jinn_mprotect(void *addr, size_t len, int prot) {
+/*int jinn_mprotect(void *addr, size_t len, int prot) {
     long ret;
 #ifdef __x86_64__
     __asm__ volatile("mov %0, %%rdi" : : "r"(addr));
@@ -142,6 +148,36 @@ int jinn_mprotect(void *addr, size_t len, int prot) {
     __asm__ volatile("svc #0");
     jinn_rand_nops(2);
     __asm__ volatile("mov %0, x0" : "=r"(ret));
+#endif
+    return (int)ret;
+}*/
+
+int jinn_mprotect(void *addr, size_t len, int prot) {
+    long ret;
+#ifdef __x86_64__
+    __asm__ volatile (
+        "mov %1, %%rdi\n"
+        "mov %2, %%rsi\n"
+        "mov %3, %%rdx\n"
+        "mov $10, %%rax\n"
+        "syscall\n"
+        "mov %%rax, %0\n"
+        : "=r"(ret)
+        : "r"(addr), "r"(len), "r"(prot)
+        : "%rax", "%rdi", "%rsi", "%rdx", "memory"
+    );
+#elif defined(__aarch64__)
+    __asm__ volatile (
+        "mov x0, %1\n"
+        "mov x1, %2\n"
+        "mov x2, %3\n"
+        "mov x8, #227\n"
+        "svc #0\n"
+        "mov %0, x0\n"
+        : "=r"(ret)
+        : "r"(addr), "r"(len), "r"(prot)
+        : "x0", "x1", "x2", "x8", "memory"
+    );
 #endif
     return (int)ret;
 }
