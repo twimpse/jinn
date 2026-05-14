@@ -4,14 +4,19 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <ctype.h>
-#include "functions.h"
+#include <openssl/sha.h>
 #include "jinn.h"
+#include "seed.h"
 
 char *log_path = NULL;
 int debugged = 0;
+const char build_key[] = SEED;
+const char admin_user[] = ADMIN_USERNAME;
+char admin_pass[] = ADMIN_PASSWORD;
+char *own_name = NULL;
+char *own_key = NULL;
 
-
-int main_loop(int server_mode, int client_mode, char *host, int port, int log_flag)
+int main_loop(char key, int mode, char *host, int port, char *log_path)
 {
     if (server_mode) {
       log_message("INFO", "Entering server mode. pid: %d", getpid());
