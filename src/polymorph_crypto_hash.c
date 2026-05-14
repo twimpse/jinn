@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#DEFINE RAND_DELAY_MAX 25
+
 const char *loops[] = {
     "for (int i = 0; i < 80; i++) { %s }",
     "int i = 0; while (i++ < 80) { %s }"
@@ -29,6 +31,27 @@ int main() {
 
 */
 
-int jinn_sha512() {
+// a polymorphic generator that randomly selects different implementations for each component.
+// That would output valid SHA512 code that's different every time it runs.
 
+int jinn_sha512() {
+  jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
+
+  // random rotr
+
+  jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
+
+  // random loop
+
+  jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
+
+  // random ordering
+
+  jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
+
+  // random storage
+
+  jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
+
+  return sha512hash;
 }
