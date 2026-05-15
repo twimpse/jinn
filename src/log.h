@@ -32,6 +32,8 @@
 07. Saved Seed.
 08. Decoding Run Time Key
 09. Encoding Run Time Key
+10. Client Mode Started
+11. Server Mode Started
 
 10. Debugging Detected
 11. Anti-debugging triggered
@@ -76,9 +78,10 @@
 41. User login
 42. Password Correct
 43. Error: Password Incorrect
-44. Password Change
+44. User Password Change
 45. User unknown
-
+46. User added
+47. User removed
 46. Exec Command Success
 47. Exec Command Failed
 47. Program shell command
@@ -100,8 +103,15 @@
 58. Fake error generated
 59. Timestomping binary
 
-59. Debug SEED 
+59. Debug SEED
 
+60. File Added
+61. File Deleted
+62. File User Permission Changed
+63. File Group Permission Changed
+64. File Count
+65. File Size
+66. Accessing file
 
 */
 
