@@ -2,6 +2,9 @@
 #include <stdarg.h>
 #include <time.h>
 #include <string.h>
+#include "seed.h"
+#include "jinn.h"
+#include "log.h"
 
 #define MAX_LOG_ENTRIES 128
 #define MAX_LOG_LEN 4096
@@ -76,3 +79,11 @@ log_message("DEBUG", "Value is %d", some_var);
 if (some_condition)
     flush_log_to_file("/tmp/debug.log");
 */
+
+int read_log(char log_source[], int num_entries){
+
+};
+
+int create_clean_log(int log_type, char address[]){
+
+};

@@ -40,10 +40,10 @@
 14. Verbose Level
 15. Debug File Open
 16. Debug File Close
-17. Debug SHA512
+17. SHA512 Operation
 
-18. VM detected — altering behavior
-19. Sandbox environment detected
+18. trace/debugging detectet — altering behavior
+19. VM/Sandbox environment detected
 20. Debug is Win
 21. Debug is Linux
 22. Debug is Mac
@@ -64,37 +64,50 @@
 35. Connecting to port
 36. Connection from tcp
 37. Connection from pipe
+38. Listening to pipe
+39. Connection from sock
+40. Listening to sock
 
 38. Received Signal
 39. Sleeping for [X] seconds
 40. Jitter applied: +/- [X] ms
+41. Angel Mode Activated
 
 41. User login
 42. Password Correct
-43. Password Incorrect
+43. Error: Password Incorrect
 44. Password Change
 45. User unknown
 
-46. Exec Command
+46. Exec Command Success
+47. Exec Command Failed
 47. Program shell command
 48. Using name transformation
+49. Error: Command not found
+50. Error: Permission mismatch
 
 49. Encrypted payload decrypted
 50. Executing Shellcode
 51. Executing from memory
 52. Spawning Shell
-53. Killing parent process
+53. Killing parent process success
+54. Error: Killing parent process failed
 
 54. Starting Polymorphic Behavior
 55. Shooting Penguins
 56. Decoy traffic generated
 57. Timestamp modified
 58. Fake error generated
+59. Timestomping binary
 
 59. Debug SEED 
 
 
 */
+
+#DEFINE LOG_BUFFER 16384
+#DEFINE LOG_FILE_BUFFER 4096
+#DEFINE LOG_BUFFER_BYTES 32
 
 char *f_errors[] = {
     // ========== MEMORY ACCESS VIOLATIONS ==========
@@ -135,6 +148,10 @@ char *f_errors[] = {
     "Certificate validation failed: ",
     "Decryption padding mismatch: ",
     "Secure channel negotiation timeout",
+    "Verified checksum: ",
+    "Unverified checksum: ",
+    "Failed checksum: ",
+    "Successfull checksum: ",
 
     // ========== SYMBOL / LINKER ==========
     "Cannot resolve external symbol: ",
@@ -167,6 +184,11 @@ char *f_errors[] = {
     "Write to read-only file: ",
     "File lock acquisition timeout: ",
     "Directory traversal attempt blocked: ",
+    "Using pid file: ",
+    "Writing to temporary file space: ",
+    "Using as temporary: ",
+    "Failed seek() at: ",
+    "Successful seek() at: ",
 
     // ========== NETWORKING ==========
     "Host lookup: ",
@@ -225,7 +247,19 @@ char *f_domains[] = {
     "oracle.com"
 };
 
-char log_message[] = 
+char *f_file_dirs[] = (
+    "/tmp/"
+    "/var/tmp/"
+    "$HOME"
+};
+
+char *f_file_names[] = (
+    "tmp."
+    "swp."
+    ".local/config"
+};
+char *log_message[] = ( 
   "Log line 1",
   "log line 2",
-  "log line 3", 
+  "log line 3" 
+);
