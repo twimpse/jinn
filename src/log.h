@@ -269,108 +269,106 @@ static inline char* decrypt_log_string(encrypted_log_string_t enc, const unsigne
 
 char *f_errors[] = {
     // ========== MEMORY ACCESS VIOLATIONS ==========
-    "Access violation at address: ",
-    "Access granted at address: ",
-    "Attempted to read/write protected memory: ",
-    "Permitted to read protected memory: ",
-    "Permitted to write protected memory: ",
-    "(Access Violation) Exception at: ",
-    "Null pointer dereference at: ",
-    "Invalid memory reference instruction at: ",
-
-    // ========== MEMORY ALLOCATION ==========
-    "Failed to allocate RWX memory region: ",
-    "Failed to allocate RW memory region: ",
-    "Success to allocate RW memory region: ",
-    "Success to allocate RWX memory region: ",
-    "Failed setting +X to memory: ",
-    "Allocation size exceeds maximum: ",
-
-    // ========== HEAP / STACK CORRUPTION ==========
-    "Heap corruption detected near: ",
-    "Double free detected on address: ",
-    "Use-after-free access at: ",
-    "Stack overflow near variable: ",
-    "Heap block overrun by: ",
-    "Free called on invalid pointer: ",
-    "Memory leak threshold exceeded: ",
+    "Access violation at address: %s",
+    "Access granted at address: %s",
+    "Attempted to read/write protected memory: %s",
+    "Permitted to read protected memory: %s",
+    "Permitted to write protected memory: %s",
+    "(Access Violation) Exception at: %s",
+    "Null pointer dereference at: %s",
+    "Invalid memory reference instruction at: %s",
+    "Failed to allocate RWX memory region: %s",
+    "Failed to allocate RW memory region: %s",
+    "Success to allocate RW memory region: %s",
+    "Success to allocate RWX memory region: %s",
+    "Failed setting +X to memory: %s",
+    "Allocation size exceeds maximum: %s",
+    "Heap corruption detected near: %s",
+    "Double free detected on address: %s",
+    "Use-after-free access at: %s",
+    "Stack overflow near variable: %s",
+    "Heap block overrun by: %s",
+    "Free called on invalid pointer: %s",
+    "Memory leak threshold exceeded: %s",
 
     // ========== CRYPTOGRAPHY ==========
-    "Crypto functions initiated at: ",
-    "Crypto function hash successful: ",
-    "Crypto function hash failed: ",
-    "Crypto function hash: ",
-    "No valid context for cryptographic operation on ",
-    "Invalid key length supplied to: ",
+    "Crypto functions initiated at: %s",
+    "Crypto function hash successful: %s",
+    "Crypto function hash failed: %s",
+    "Crypto function hash: %s",
+    "No valid context for cryptographic operation on %s",
+    "Invalid key length supplied to: %s",
     "Random number generator entropy depleted",
-    "Certificate validation failed: ",
-    "Decryption padding mismatch: ",
+    "Certificate validation failed: %s",
+    "Decryption padding mismatch: %s",
     "Secure channel negotiation timeout",
-    "Verified checksum: ",
-    "Unverified checksum: ",
-    "Failed checksum: ",
-    "Successfull checksum: ",
+    "Verified checksum: %s",
+    "Unverified checksum: %s",
+    "Failed checksum: %s",
+    "Successfull checksum: %s",
 
     // ========== SYMBOL / LINKER ==========
-    "Cannot resolve external symbol: ",
-    "Resolve external symbol: ",
-    "Missing entry point: ",
+    "Cannot resolve external symbol: %s",
+    "Resolve external symbol: %s",
+    "Missing entry point",
     "Unhandled exception in dynamic linker",
     "Unwind failed: corrupted frame pointer",
     "TLS (Thread Local Storage) init failed",
-    "Relocation truncated to fit: ",
+    "Relocation truncated to fit",
 
     // ========== INTEGRITY (CRC / RTTI) ==========
-    "CRC mismatch in loaded module: ",
-    "CRC match in loaded module: ",
+    "CRC mismatch in loaded module: %s",
+    "CRC match in loaded module: %s",
     "RTTI corrupted or missing for vtable",
-    "Stack cookie mismatch during unwind ",
+    "Stack cookie mismatch during unwind",
 
     // ========== PROCESS / THREAD ==========
-    "Thread deadlock detected on mutex: ",
-    "Race condition suspected at: ",
-    "Failed to create process: ",
-    "Process terminated unexpectedly with code: ",
-    "Thread pool starvation: ",
-    "Signal handler reentrancy detected (signal: )",
+    "Thread deadlock detected on mutex: %s",
+    "Race condition suspected at: %s",
+    "Failed to create process: %s",
+    "Process terminated unexpectedly with code: %s",
+    "Thread pool starvation: %s",
+    "Signal handler reentrancy detected (signal: %d )",
 
     // ========== FILE I/O ==========
-    "Failed to open: ",
-    "Failed to close: ",
-    "Failed to find: ",
-    "File descriptor leak detected (fd: )",
-    "Write to read-only file: ",
-    "File lock acquisition timeout: ",
-    "Directory traversal attempt blocked: ",
-    "Using pid file: ",
-    "Writing to temporary file space: ",
-    "Using as temporary: ",
-    "Failed seek() at: ",
-    "Successful seek() at: ",
+    "Failed to open: %s",
+    "Failed to close: %s",
+    "Failed to find: %s",
+    "File descriptor leak detected (fd: %s )",
+    "Write to read-only file: %s",
+    "File lock acquisition timeout: %s",
+    "Directory traversal attempt blocked: %s",
+    "Using pid file: %s",
+    "Writing to temporary file space: %s",
+    "Using as temporary: %s",
+    "Failed seek() at: %s",
+    "Successful seek() at: %s",
 
     // ========== NETWORKING ==========
-    "Host lookup: ",
-    "Connecting to: ",
-    "Connection from: ",
-    "Packet from: ",
-    "Packet to: ",
-    "Opening port: ",
-    "Binding host: ",
-    "TCP retransmission limit reached for: ",
-    "DNS lookup: ",
+    "Host lookup: %s",
+    "Connecting to: %s",
+    "Connection from: %s",
+    "Packet from: %s",
+    "Packet to: %s",
+    "Opening port: %d",
+    "Binding host: %d",
+    "TCP retransmission limit reached for: %s",
     "Socket bind failed: address already in use",
-    "Connection reset by peer: ",
+    "Connection reset by peer: %s",
     "TLS handshake failure: cipher mismatch",
+    "TLS handshake success: cipher negotiation",
+    "TLS handshake success: cipher handshake",
 
     // ========== IPC ==========
     "Inter-process communication buffer overflow",
+    "Inter-process communication buffer update",
 
     // ========== CALLBACKS ==========
     "callback failed to initialize at: ",
 
     // ========== TIMING ==========
-    "Start time: ",
-    "End time: "
+    "Start time: %s",
+    "End time: %s"
 };
 
 char *f_domains[] = {
@@ -416,8 +414,343 @@ char *f_file_names[] = (
     "swp."
     ".local/config"
 };
-char *log_message[] = ( 
-  "Log line 1",
-  "log line 2",
-  "log line 3" 
-);
+
+/*
+   ,    ,    /\   /\
+  /( /\ )\  _\ \_/ /_ ,
+  |\_||_/| < \_   _/ >
+  \______/  \|0   0|/ |
+    _\/_   _(_  ^  _)_
+   ( () ) /`\|V"""V|/`\
+     {}   \  \_____/  /
+     ()   /\   )=(   /\
+     {}  /  \_/\=/\_/  \
+
+        ,   ,
+       /(   )\
+       \ \_/ /   , /\ ,
+       /_   _\  /| || |\
+      | \> </ | |\_||_/|
+      (_  ^  _)  \____/
+    /`\|IIIII|/`\ _\/_
+    \  \_____/  /  ()
+    /\   )=(   /\  ()
+   /  `-.\=/.-'  \ ()
+
+
+
+
+         .m.                                   ,_
+         ' ;M;                                ,;m `
+           ;M;.           ,      ,           ;SMM;
+          ;;Mm;         ,;  ____  ;,         ;SMM;
+         ;;;MM;        ; (.MMMMMM.) ;       ,SSMM;;
+       ,;;;mMp'        l  ';mmmm;/  j       SSSMM;;
+     .;;;;;MM;         .\,.mmSSSm,,/,      ,SSSMM;;;
+    ;;;;;;mMM;        .;MMmSSSSSSSmMm;     ;MSSMM;;;;
+   ;;;;;;mMSM;     ,_ ;MMmS;;;;;;mmmM;  -,;MMMMMMm;;;;
+  ;;;;;;;MMSMM;     \"*;M;( ( '') );m;*"/ ;MMMMMM;;;;;,
+ .;;;;;;mMMSMM;      \(@;! _     _ !;@)/ ;MMMMMMMM;;;;;,
+ ;;;;;;;MMSSSM;       ;,;.*o*> <*o*.;m; ;MMMMMMMMM;;;;;;,
+.;;;;;;;MMSSSMM;     ;Mm;           ;M;,MMMMMMMMMMm;;;;;;.
+;;;;;;;mmMSSSMMMM,   ;Mm;,   '-    ,;M;MMMMMMMSMMMMm;;;;;;;
+;;;;;;;MMMSSSMMMMMMMm;Mm;;,  ___  ,;SmM;MMMMMMSSMMMM;;;;;;;;
+;;'";;;MMMSSSSMMMMMM;MMmS;;,  "  ,;SmMM;MMMMMMSSMMMM;;;;;;;;.
+!   ;;;MMMSSSSSMMMMM;MMMmSS;;._.;;SSmMM;MMMMMMSSMMMM;;;;;;;;;
+    ;;;;*MSSSSSSMMMP;Mm*"'q;'   `;p*"*M;MMMMMSSSSMMM;;;;;;;;;
+    ';;;  ;SS*SSM*M;M;'     `-.        ;;MMMMSSSSSMM;;;;;;;;;,
+     ;;;. ;P  `q; qMM.                 ';MMMMSSSSSMp' ';;;;;;;
+     ;;;; ',    ; .mm!     \.   `.   /  ;MMM' `qSS'    ';;;;;;
+     ';;;       ' mmS';     ;     ,  `. ;'M'   `S       ';;;;;
+      `;;.        mS;;`;    ;     ;    ;M,!     '        ';;;;
+       ';;       .mS;;, ;   '. o  ;   oMM;                ;;;;
+        ';;      MMmS;; `,   ;._.' -_.'MM;                 ;;;
+         `;;     MMmS;;; ;   ;      ;  MM;                 ;;;
+           `'.   'MMmS;; `;) ',    .' ,M;'                 ;;;
+              \    '' ''; ;   ;    ;  ;'                   ;;
+               ;        ; `,  ;    ;  ;                   ;;
+                        |. ;  ; (. ;  ;      _.-.         ;;
+           .-----..__  /   ;  ;   ;' ;\  _.-" .- `.      ;;
+         ;' ___      `*;   `; ';  ;  ; ;'  .-'    :      ;
+         ;     """*-.   `.  ;  ;  ;  ; ' ,'      /       |
+         ',          `-_    (.--',`--'..'      .'        ',
+           `-_          `*-._'.\\\;||\\)     ,'
+              `"*-._        "*`-ll_ll'l    ,'
+                 ,==;*-._           "-.  .'
+              _-'    "*-=`*;-._        ;'
+            ."            ;'  ;"*-.    `
+            ;   ____      ;//'     "-   `,
+            `+   .-/                 ".\\;
+              `*" /                    "'
+
+
+                   ,_  .--.
+             , ,   _)\/    ;--.
+     . ' .    \_\-'   |  .'    \
+    -= * =-   (.-,   /  /       |
+     ' .\'    ).  ))/ .'   _/\ /
+         \_   \_  /( /     \ /(
+         /_\ .--'   `-.    //  \
+         ||\/        , '._//    |
+         ||/ /`(_ (_,;`-._/     /
+         \_.'   )   /`\       .'
+              .' .  |  ;.   /`
+             /      |\(  `.(
+            |   |/  | `    `
+            |   |  /
+            |   |.'
+         __/'  /
+     _ .'  _.-`
+  _.` `.-;`/
+ /_.-'` / /
+       | /
+jgs   ( /
+     /_/
+
+              \
+               \
+                \\
+                 \\
+                  >\/7
+              _.-(6'  \
+             (=___._/` \
+                  )  \ |
+                 /   / |
+                /    > /
+               j    < _\
+           _.-' :      ``.
+           \ r=._\        `.
+          <`\\_  \         .`-.
+           \ r-7  `-. ._  ' .  `\
+            \`,      `-.`7  7)   )
+             \/         \|  \'  / `-._
+                        ||    .'
+cjr                      \\  (
+10mar02                   >\  >
+                      ,.-' >.'
+                     <.'_.''
+                       <'
+
+                '-.,;;:;,
+                 _;\;|\;:;,
+                ) __ ' \;::,
+            .--'  e   ':;;;:,           ;,
+           (^           ;;::;          ;;;,
+   _        --_.--.___,',:;::;     ,,,;:;;;,
+  < \        `;     |  ;:;;:;        ':;:;;;,,
+<`-; \__     ,;    /    ';:;;:,       ';;;'
+<`_   __',   ; ,  /    ::;;;:         //
+   `)|  \ \   ` .'      ';;:;,       //
+    `    \ `\  /        ;;:;;.      //__
+          \  `/`         ;:;  ~._,=~`   `~=,
+           \_|      (        ^     ^  ^ _^  \
+             \    _,`      / ^ ^  ^   .' `.^ ;
+    <`-.  jgs '-;`       /`  ^   ^  /\    ) ^/
+    <'- \__..-'` ___,,,-'._ ^  ^ _.'\^`'-' ^/
+     `)_   ..-''`          `~~~~`    `~===~`
+     <_.-`-._\
+
+                                _,.-------.,_
+                            ,;~'             '~;,
+                          ,;                     ;,
+                         ;                         ;
+                        ,'                         ',
+                       ,;                           ;,
+                       ; ;      .           .      ; ;
+                       | ;   ______       ______   ; |
+                       |  `/~"     ~" . "~     "~\'  |
+                       |  ~  ,-~~~^~, | ,~^~~~-,  ~  |
+                        |   |        }:{        |   |
+                        |   l       / | \       !   |
+                        .~  (__,.--" .^. "--.,__)  ~.
+                        |     ---;' / | \ `;---     |
+                         \__.       \/^\/       .__/
+                          V| \                 / |V
+       __                  | |T~\___!___!___/~T| |                  _____
+    .-~  ~"-.              | |`IIII_I_I_I_IIII'| |               .-~     "-.
+   /         \             |  \,III I I I III,/  |              /           Y
+  Y          ;              \   `~~~~~~~~~~'    /               i           |
+  `.   _     `._              \   .       .   /               __)         .'
+    )=~         `-.._           \.    ^    ./           _..-'~         ~"<_
+ .-~                 ~`-.._       ^~~~^~~~^       _..-'~                   ~.
+/                          ~`-.._           _..-'~                           Y
+{        .~"-._                  ~`-.._ .-'~                  _..-~;         ;
+ `._   _,'     ~`-.._                  ~`-.._           _..-'~     `._    _.-
+    ~~"              ~`-.._                  ~`-.._ .-'~              ~~"~
+  .----.            _..-'  ~`-.._                  ~`-.._          .-~~~~-.
+ /      `.    _..-'~             ~`-.._                  ~`-.._   (        ".
+Y        `=--~                  _..-'  ~`-.._                  ~`-'         |
+|                         _..-'~             ~`-.._                         ;
+`._                 _..-'~                         ~`-.._            -._ _.'
+   "-.="      _..-'~                                     ~`-.._        ~`.
+    /        `.                                                ;          Y
+   Y           Y                    -dcau and Mark            Y           |
+   |           ;                                              `.          /
+   `.       _.'                                                 "-.____.-'
+     ~-----"
+265
+
+0
+
+
+                 ___====-_  _-====___
+           _--^^^#####//      \\#####^^^--_
+        _-^##########// (    ) \\##########^-_
+       -############//  |\^^/|  \\############-
+     _/############//   (@::@)   \\############\_
+    /#############((     \\//     ))#############\
+   -###############\\    (oo)    //###############-
+  -#################\\  / VV \  //#################-
+ -###################\\/      \//###################-
+_#/|##########/\######(   /\   )######/\##########|\#_
+|/ |#/\#/\#/\/  \#/\##\  |  |  /##/\#/  \/\#/\#/\#| \|
+`  |/  V  V  `   V  \#\| |  | |/#/  V   '  V  V  \|  '
+   `   `  `      `   / | |  | | \   '      '  '   '
+                    (  | |  | |  )
+                   __\ | |  | | /__
+                  (vvv(VVV)(VVV)vvv)
+
+
+
+        88  88  888b      88  888b      88
+        88  ""  8888b     88  8888b     88
+        88      88 `8b    88  88 `8b    88
+        88  88  88  `8b   88  88  `8b   88
+        88  88  88   `8b  88  88   `8b  88
+        88  88  88    `8b 88  88    `8b 88
+88,   ,d88  88  88     `8888  88     `8888
+ "Y8888P"   88  88      `888  88      `888
+
+
+     @@@  @@@  @@@  @@@  @@@  @@@
+     @@@  @@@  @@@@ @@@  @@@@ @@@
+     @@!  @@!  @@!@!@@@  @@!@!@@@
+     !@!  !@!  !@!!@!@!  !@!!@!@!
+     !!@  !!@  @!@ !!@!  @!@ !!@!
+     !!!  !!!  !@!  !!!  !@!  !!!
+     !!:  !!:  !!:  !!!  !!:  !!!
+!!:  :!:  :!:  :!:  !:!  :!:  !:!
+::: : ::   ::   ::   ::   ::   ::
+ : :::    :    ::    :   ::    :
+
+
+   oooo  o8o  ooooo      ooo ooooo      ooo
+   `888  `"'  `888b.     `8' `888b.     `8'
+    888 oooo   8 `88b.    8   8 `88b.    8
+    888 `888   8   `88b.  8   8   `88b.  8
+    888  888   8     `88b.8   8     `88b.8
+    888  888   8       `888   8       `888
+.o. 88P o888o o8o        `8  o8o        `8
+`Y888P
+
+
+       █████  ███  ██████   █████ ██████   █████
+      ░░███  ░░░  ░░██████ ░░███ ░░██████ ░░███
+       ░███  ████  ░███░███ ░███  ░███░███ ░███
+       ░███ ░░███  ░███░░███░███  ░███░░███░███
+       ░███  ░███  ░███ ░░██████  ░███ ░░██████
+ ███   ░███  ░███  ░███  ░░█████  ░███  ░░█████
+░░████████   █████ █████  ░░█████ █████  ░░█████
+ ░░░░░░░░   ░░░░░ ░░░░░    ░░░░░ ░░░░░    ░░░░░
+
+
+
+       ▄█  ▄▀▀█▀▄    ▄▀▀▄ ▀▄  ▄▀▀▄ ▀▄
+ ▄▀▀▀█▀ ▐ █   █  █  █  █ █ █ █  █ █ █
+█    █    ▐   █  ▐  ▐  █  ▀█ ▐  █  ▀█
+▐    █        █       █   █    █   █
+  ▄   ▀▄   ▄▀▀▀▀▀▄  ▄▀   █   ▄▀   █
+   ▀▀▀▀   █       █ █    ▐   █    ▐
+          ▐       ▐ ▐        ▐
+
+
+    /$$$$$ /$$ /$$   /$$ /$$   /$$
+   |__  $$|__/| $$$ | $$| $$$ | $$
+      | $$ /$$| $$$$| $$| $$$$| $$
+      | $$| $$| $$ $$ $$| $$ $$ $$
+ /$$  | $$| $$| $$  $$$$| $$  $$$$
+| $$  | $$| $$| $$\  $$$| $$\  $$$
+|  $$$$$$/| $$| $$ \  $$| $$ \  $$
+ \______/ |__/|__/  \__/|__/  \__/
+
+    .---.                           
+    |   |                           
+    '---'.--.   _..._      _..._    
+    .---.|__| .'     '.  .'     '.  
+    |   |.--..   .-.   ..   .-.   . 
+    |   ||  ||  '   '  ||  '   '  | 
+    |   ||  ||  |   |  ||  |   |  | 
+    |   ||  ||  |   |  ||  |   |  | 
+    |   ||  ||  |   |  ||  |   |  | 
+    |   ||__||  |   |  ||  |   |  | 
+ __.'   '    |  |   |  ||  |   |  | 
+|      '     |  |   |  ||  |   |  | 
+|____.'      '--'   '--''--'   '--' 
+
+
+    ░█████ ░██░███    ░██ ░███    ░██ 
+      ░██     ░████   ░██ ░████   ░██ 
+      ░██  ░██░██░██  ░██ ░██░██  ░██ 
+      ░██  ░██░██ ░██ ░██ ░██ ░██ ░██ 
+░██   ░██  ░██░██  ░██░██ ░██  ░██░██ 
+░██   ░██  ░██░██   ░████ ░██   ░████ 
+ ░██████   ░██░██    ░███ ░██    ░███ 
+
+
+    _____  _   ____  _____  ____  _____  
+   |_   _|(_) |_   \|_   _||_   \|_   _| 
+     | |  __    |   \ | |    |   \ | |   
+ _   | | [  |   | |\ \| |    | |\ \| |   
+| |__' |  | |  _| |_\   |_  _| |_\   |_  
+`.____.' [___]|_____|\____||_____|\____| 
+
+
+ ▄▄▄██▀▀▀██▓ ███▄    █  ███▄    █ 
+   ▒██  ▓██▒ ██ ▀█   █  ██ ▀█   █ 
+   ░██  ▒██▒▓██  ▀█ ██▒▓██  ▀█ ██▒
+▓██▄██▓ ░██░▓██▒  ▐▌██▒▓██▒  ▐▌██▒
+ ▓███▒  ░██░▒██░   ▓██░▒██░   ▓██░
+ ▒▓▒▒░  ░▓  ░ ▒░   ▒ ▒ ░ ▒░   ▒ ▒ 
+ ▒ ░▒░   ▒ ░░ ░░   ░ ▒░░ ░░   ░ ▒░
+ ░ ░ ░   ▒ ░   ░   ░ ░    ░   ░ ░ 
+ ░   ░   ░           ░          ░ 
+
+ლ(ಠ益ಠ)ლ
+
+(ⱺ ʖ̯ⱺ)
+
+‹’’›(Ͼ˳Ͽ)‹’’›
+
+
+
+<*_*>
+
+(･`_´･ )
+
+( ͡° ᴥ ͡°)
+
+=^..^=
+
+(︶︹︶)
+
+╭∩╮ʕ•ᴥ•ʔ╭∩╮
+
+(♥_♥)
+
+
+ ̿ ̿' ̿'\̵͇̿̿\з=(•̪●)=ε/̵͇̿̿/'̿''̿ ̿
+
+
+(⋗_⋖)
+
+?! ɹoɹɹƎ
+
+d[-_-]b
+
+'-'_@_
+
+<:3 )~~~
+
+[ô¿ô]
+
+*/
