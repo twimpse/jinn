@@ -834,9 +834,105 @@ char *line_long[] = (
 
 );
 
-char *f_words_actions[] = (
 
-  "Transferred"
+char *f_mud_responses[] = (
+  // Original lines
+  "You go north",
+  "You go south",
+  "You go west",
+  "You go east",
+  "You go through the door",
+  "The door is locked",
+  "You look around",
+  "You see a shrubbery",
+  "You see nothing",
+  "You see a stone wall",
+  "You stand in front of a door",
+  "It is too dark",
+  "You see an open field",
+  "You see a wooded area",      // Added missing comma
+  "You meet an elf",
+  "You meet a wizard",
+  "You meet a troll",
+  "You are in the dark forest",  // "forrest" typo kept as-is
+  "You are under attack",
+  "You have been defeated",
+  "You have been sucessful",     // "sucessfull" typo kept as-is
+  "You have defeated the enemy",
 
-);
+  // Movement & Environment
+  "You cannot go that way",
+  "A wall of thorny vines blocks your path",
+  "A wide river blocks your path",
+  "You wade through a shallow stream",
+  "You climb a steep rocky slope",
+  "You enter a misty clearing",
+  "You are standing at the edge of a cliff",
+  "A narrow path leads into darkness",
+
+  // Combat
+  "You draw your weapon",
+  "Your attack misses",
+  "You land a glancing blow",
+  "You strike true",
+  "You are wounded",
+  "You dodge the attack",
+  "Your enemy flees",
+  "You retrieve a healing potion from your pack",
+  "You shoot an arrow",
+  "Your arrow misses",
+  "Your arrow strikes true",
+  "You have no more arrows",
+  "You have %d bird legs",
+  "You have %d small pelts",
+
+  // NPCs & Creatures
+  "You meet a hooded stranger",
+  "You meet a wandering merchant",
+  "You meet a fair maiden",
+  "A raven watches you from a dead tree",
+  "You encounter a hungry wolf",
+  "A giant spider descends from above",
+  "You see a sleeping dragon in the distance",
+  "You trade with the maiden with food for keys",
+  "You trade with the hooded stranger for arrows",
+  "You trade with the wizard for potions",
+  "You buy for %d gold",
+  "You sell for %d gold",
+  "Do you know the magic password",
+
+  // Items & Interaction
+  "There is nothing here to take",
+  "There is nothing here to find",
+  "You pick up a rusty key",
+  "You find a few gold coins",
+  "The chest is empty",
+  "You light your torch",
+  "The door creaks open",
+  "You hear footsteps behind you",
+  "You see a small chest",
+  "The chest is locked",
+  "You find some old bread",
+  "You find a healing potion",
+  "You find dust",
+  "You find nothing but sticks",
+  "You find a pretty rock",
+  "You find an arrow",
+  "You find a health potion",
+  "You find a bird leg",
+  "You find a small pelt",
+
+  // Status & Messages
+  "You are too tired to continue",
+  "You start a fire",
+  "You setup camp",
+  "You rest by the fire",
+  "You feel a dark presence",
+  "A chill runs down your spine",
+  "You are lost",
+  "You have found your way",
+  "You have leveled up!",
+  "Your vision blurs — you have been poisoned"
+};
+
 */
