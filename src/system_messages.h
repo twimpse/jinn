@@ -369,46 +369,43 @@ char *f_errors[] = {
 
 char *f_domains[] = {
     // 1. Search & Advertising
-    "google.com",
+    "google",
 
     // 2. Cloud Infrastructure (IaaS)
-    "aws.com",
-    "azure.com",
-    "gcp.com",              // Google Cloud Platform
+    "aws",
+    "azure",
+    "gcp",              // Google Cloud Platform
 
     // 3. CDN & DDoS Protection
-    "cloudflare.com",
-    "fastly.com",
-    "akamai.com",
+    "cloudflare",
+    "fastly",
+    "akamai",
 
     // 4. Operating Systems / Hardware
-    "apple.com",
-    "microsoft.com",
+    "apple",
+    "microsoft",
 
     // 5. Social Media
-    "meta.com",             // Facebook/Instagram
-    "twitter.com",
-    "tiktok.com",
+    "meta",             // Facebook/Instagram
+    "x",
 
     // 6. E-commerce / Retail
-    "amazon.com",
-    "walmart.com",
+    "amazon",
+    "walmart",
 
     // 7. Enterprise SaaS
-    "salesforce.com",
-    "oracle.com"
+    "oracle"
 };
 
 char *f_file_dirs[] = (
-    "/tmp/"
-    "/var/tmp/"
+    "/tmp/",
+    "/var/tmp/",
     "$HOME"
 };
 
 char *f_file_names[] = (
-    "tmp."
-    "swp."
-    ".local/config"
+    "tmp",
+    "swp"
 };
 
 /*
