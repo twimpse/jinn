@@ -409,7 +409,7 @@ char *f_file_names[] = (
 };
 
 
-char *gfx_banner[] = {
+const char* gfx_banner[] = {
 "   ,    ,    /\   /\\n"
 "  /( /\ )\  _\ \_/ /_ ,\n"
 "  |\_||_/| < \_   _/ >\n"
@@ -608,7 +608,7 @@ const char* banners[] = {
 "     !!:  !!:  !!:  !!!  !!:  !!!\n"
 "!!:  :!:  :!:  :!:  !:!  :!:  !:!\n"
 "::: : ::   ::   ::   ::   ::   ::\n"
-" : :::    :    ::    :   ::    :\n",
+"  : :::    :    ::    :   ::    :\n",
 
 
 "   oooo  o8o  ooooo      ooo ooooo      ooo\n"
@@ -723,14 +723,16 @@ char *line_base[] = (
   "(︶︹︶)",
   "╭∩╮ʕ•ᴥ•ʔ╭∩╮",
   "(♥_♥)",
-  " ̿ ̿' ̿'\̵͇̿̿\з=(•̪●)=ε/̵͇̿̿/'̿''̿ ̿",
   "(⋗_⋖)",
-  "?! ɹoɹɹƎ",
   "d[-_-]b",
   "'-'_@_",
   "<:3 )~~~",
-  "[ô¿ô]"
+  "[ô¿ô]",
+  "?! ɹoɹɹƎ",
+  "   ̿ ̿' ̿'\̵͇̿̿\з=(•̪●)=ε/̵͇̿̿/'̿''̿ ̿  "
 );
+
+// two short lines ^ one long line
 
 char *line_short[] = (
   "ﾟ⋆☂︎⋆",
@@ -796,6 +798,8 @@ char *line_short[] = (
   "ʚĭɞִ"
 );
 
+// four line_long per row
+
 char *line_long[] = (
 
   "°❀⋆.ೃ࿔･𓂃 ོ☼𓂃",
@@ -848,9 +852,15 @@ char *f_mud_responses[] = (
   "The door is locked",
   "You look around",
   "You see a shrubbery",
+  "You see a big rock",
+  "You see a building",
+  "You see a large building",
+  "You see a small cottage",
+  "You see an inn",
   "You see nothing",
   "You see a stone wall",
   "You stand in front of a door",
+  "You see a small cave"
   "It is too dark",
   "You see an open field",
   "You see a wooded area",      // Added missing comma
@@ -862,6 +872,9 @@ char *f_mud_responses[] = (
   "You have been defeated",
   "You have been sucessful",     // "sucessfull" typo kept as-is
   "You have defeated the enemy",
+  "You sleep at the inn",
+  "Do you want to sleep at the inn",
+  "It costs %d gold to sleep at the in",
 
   // Movement & Environment
   "You cannot go that way",
@@ -881,6 +894,7 @@ char *f_mud_responses[] = (
   "You are wounded",
   "You dodge the attack",
   "Your enemy flees",
+  "You flee",
   "You retrieve a healing potion from your pack",
   "You shoot an arrow",
   "Your arrow misses",
@@ -947,11 +961,13 @@ char *f_mud_responses[] = (
   "You rest by the fire",
   "You feel a dark presence",
   "A chill runs down your spine",
+  "You feel optimistic"
   "You are lost",
   "You have found your way",
   "You have leveled up!",
   "Your vision blurs — you have been poisoned",
   "You are dying"
+  "You died"
 };
 
 */

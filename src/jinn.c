@@ -20,7 +20,7 @@ bool is_shooting_pengguins = false;
 int start_time = NULL;
 int cpu_start_time = NULL;
 bool user_has_logged_in false;
-
+bool is_slim_shady = false;
 
 int main_loop() {
   mode(int mode_type);
