@@ -23,8 +23,10 @@ bool user_has_logged_in false;
 bool is_slim_shady = false;
 int banner_key = 0;
 char canary[512]
-char code_key[] = CODE_KEY;
-
+const char code_key[] = CODE_KEY;
+const char jinn_version[] = VERSION;
+const char jinn_admin[] = ADMIN_USERNAME;
+const char jinn_password[] = ADMIN_PASSWORD;
 
 int main_loop() {
   mode(int mode_type);

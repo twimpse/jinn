@@ -11,6 +11,8 @@
 #define SHELL_MODE shell_mode
 #endif
 
+
+
 int shell_command(const char *input, int use_socket, int socket_fd)
 {
   FILE *out = (use_socket && socket_fd > 0) ? fdopen(socket_fd, "w") : stdout;

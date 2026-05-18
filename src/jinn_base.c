@@ -1,9 +1,8 @@
 #include "system_messages.h"
 
 
-int print_banner() {
- random = rand(srand()) %10;
- printf(banner[random]);
+int print_banner(int banner_key) {
+ printf(banner[banner_key]);
 }
 
 int print_name() {
@@ -11,7 +10,7 @@ int print_name() {
 };
 
 int print_version() {
-
+ printf(jinn_version());
 };
 
 int print_line() {
@@ -54,5 +53,12 @@ int print_break() {
 }
 
 int print_usage() {
-
+  printf(print_banner(banner_key));
+  printf("\n\n");
+  printf(print_line());
+  printf(print_line());
+  printf("\n");
+  print_name();
+  print_version();
+  exit 1;
 };
