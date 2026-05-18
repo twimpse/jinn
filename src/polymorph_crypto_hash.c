@@ -1,9 +1,16 @@
-// Polymorphic sha512 hash function
+/* Polymorphic sha512 hash function
+   Uses a polymorphic approch to creating a sha512 hash function.
+
+   The loop used is varied as are the ROTR impls. Different iteration
+   Each run, but very different code run each time. Also random jitter,
+   Junk code and delays are added into the mix.
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "polymorph.h"
 
-#DEFINE RAND_DELAY_MAX 25
 
 const char *loops[] = {
     "for (int i = 0; i < 80; i++) { %s }",
@@ -42,10 +49,12 @@ int jinn_sha512() {
   jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
 
   // random loop
+  // jinn_rand_junk_inst() in loop
 
   jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
 
   // random ordering
+  // jinn_rand_junk_inst() in loop
 
   jinn_rand_delay((rand() % RAND_DELAY_MAX) +1);
 
