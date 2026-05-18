@@ -19,6 +19,7 @@ bool is_mud false;
 bool is_shooting_pengguins = false;
 int start_time = NULL;
 int cpu_start_time = NULL;
+bool user_has_logged_in false;
 
 
 int main_loop() {

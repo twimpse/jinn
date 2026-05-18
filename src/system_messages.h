@@ -886,6 +886,10 @@ char *f_mud_responses[] = (
   "You have %d arrows",
   "You have %d bird legs",
   "You have %d small pelts",
+  "You have been struck in your right arm"
+  "You have been struck in your left arm"
+  "You have been struck in your right leg"
+  "You have been struck in your left leg"
 
   // NPCs & Creatures
   "You meet a hooded stranger",
@@ -895,12 +899,22 @@ char *f_mud_responses[] = (
   "You encounter a hungry wolf",
   "A giant spider descends from above",
   "You see a sleeping dragon in the distance",
+  "You see a dragon right to you",
+  "You wake the dragon",
+  "You give the dragon %s",
+  "You have been killed by the dragon",
+  "You have been given the %s"
   "You trade with the maiden with food for keys",
   "You trade with the hooded stranger for arrows",
   "You trade with the wizard for potions",
   "You buy for %d gold",
   "You sell for %d gold",
   "Do you know the magic password",
+  "You have recieved a sword"
+  "You have recieved a bow"
+  "You have recieved a dagger"
+  "You have recieved a rusty spoon"
+  "You have recieved a wooden spoon"
 
   // Items & Interaction
   "There is nothing here to take",
