@@ -18,3 +18,39 @@ int prevent_trace(void) {
 #endif
 return 0;
 }
+
+int check_trace(){
+
+};
+
+int check_vm() {
+
+};
+
+int check_sandbox() {
+
+}
+
+int check_heuristics() {
+
+};
+
+int check_cpu() {
+
+};
+
+int check_gpu() {
+
+};
+
+int check_runtime() {
+
+};
+
+int check_iterations() {
+
+};
+
+int set_heuristics() {
+
+};
