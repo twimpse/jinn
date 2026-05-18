@@ -31,25 +31,43 @@
 Small Health Potion +50 25 gold
 Large Health Potion +100 45 gold
 Bird leg +20 health 10 gold
-Lucky Potion +314 to luck multiplexer. Price 250 gold
+Lucky Potion +113 to luck multiplexer. Price 250 gold
 
 Shots with arrows cause no flee, one shot kill. 50 injury points
 
 Each round heals +3 health to max 100 unless poisioned
 
-Wolf Strikes cause 5-15 in damage has 25 health, drops pelts
+Wolf Strikes cause 5-15 in damage has 20-25 health, drops 5-10 pelts
 
-Troll strikes cause 15-30 in damage has 35 health, dtops gold
+Troll strikes cause 15-30 in damage has 30-35 health, dtops 5-30 gold
 
 Spider attacks cause 1-5 in damage and 50% poisioned for 10 rounds (no health regen) has 5 in health
+
+Dragom attacks cause 20-40 in damage and has 250 health
 
 Sprained ancle 10-15 damage
 
 Arrows cost 25 gold for 5
 
-Dagger does 10-20 damage
+Bow cost 81-89 gold
 
-Sword does 20-40 damage
+Wooden spoon 0 gold 1-4 damage
+
+Rusty Spoon 10-15 gold 3-6 damage
+
+Dagger does 10-20 damage cost 33-39 gold
+
+Sword does 20-40 damage 62-69 gold
+
+Chests can contain 5-10 gold (25%), potions (3%) or arrows (10%)
+
+Start with 91-120 gold
+
+Maidens trade pelts and gold for potions and room keys
+
+Elfs trade pelts and gold for arrows and rusty keys
+
+Wizards trade in gold for potions, food, weapons, keys
 
 */
 
@@ -141,6 +159,7 @@ typedef struct GameState {
     int have_bow;
     int have_rusty_spoon;
     int have_wooden_spoon;
+    int have_skel_key;
 
     // Current equipment
     int current_weapon_type;
@@ -191,6 +210,7 @@ int mud_have_dagger;
 int mud_have_bow;
 int mud_have_rusty_spoon;
 int mud_have_wooden_spoon;
+int mud_have_skel_key;
 
 int mud_current_weapon;
 int mud_defense;
