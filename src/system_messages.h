@@ -874,17 +874,18 @@ char *f_mud_responses[] = (
   "You have defeated the enemy",
   "You sleep at the inn",
   "Do you want to sleep at the inn",
-  "It costs %d gold to sleep at the in",
+  "It costs %d gold to sleep at the inn",
 
   // Movement & Environment
   "You cannot go that way",
   "A wall of thorny vines blocks your path",
   "A wide river blocks your path",
   "You wade through a shallow stream",
-  "You climb a steep rocky slope",
+  "The steep rocky slope is too steep to climb",
   "You enter a misty clearing",
   "You are standing at the edge of a cliff",
   "A narrow path leads into darkness",
+  "You slip and sprain your ancle"
 
   // Combat
   "You draw your weapon",
@@ -895,6 +896,9 @@ char *f_mud_responses[] = (
   "You dodge the attack",
   "Your enemy flees",
   "You flee",
+  "You are attacked by the wolf",
+  "You are attacked by the spider",
+  "You are attacked by the troll",
   "You retrieve a healing potion from your pack",
   "You shoot an arrow",
   "Your arrow misses",
@@ -910,13 +914,13 @@ char *f_mud_responses[] = (
 
   // NPCs & Creatures
   "You meet a hooded stranger",
-  "You meet a wandering merchant",
+  "You meet a wizard in robes",
   "You meet a fair maiden",
   "A raven watches you from a dead tree",
   "You encounter a hungry wolf",
   "A giant spider descends from above",
   "You see a sleeping dragon in the distance",
-  "You see a dragon right to you",
+  "You see a dragon right next to you",
   "You wake the dragon",
   "You give the dragon %s",
   "You have been killed by the dragon",
