@@ -27,6 +27,32 @@
 #define NPC_DRAGON 3
 #define NPC_VILLAIN 4
 
+/*
+Small Health Potion +50 25 gold
+Large Health Potion +100 45 gold
+Bird leg +20 health 10 gold
+Lucky Potion +314 to luck multiplexer. Price 250 gold
+
+Shots with arrows cause no flee, one shot kill. 50 injury points
+
+Each round heals +3 health to max 100 unless poisioned
+
+Wolf Strikes cause 5-15 in damage has 25 health, drops pelts
+
+Troll strikes cause 15-30 in damage has 35 health, dtops gold
+
+Spider attacks cause 1-5 in damage and 50% poisioned for 10 rounds (no health regen) has 5 in health
+
+Sprained ancle 10-15 damage
+
+Arrows cost 25 gold for 5
+
+Dagger does 10-20 damage
+
+Sword does 20-40 damage
+
+*/
+
 // ============= STRUCTS =============
 
 typedef struct Item {
@@ -80,6 +106,7 @@ typedef struct Room {
     int has_monster;
     int has_chest;
     int has_loot;
+    int has_bird;
     int visited;
     int has_npc;
     int npc_id;         // Which NPC (elf, wizard, troll, etc.)
@@ -106,7 +133,7 @@ typedef struct GameState {
 
     // Quest items
     int bird_legs;
-    int arrows;
+    int mud_arrows;
 
     // Equipment ownership flags
     int have_sword;
@@ -150,7 +177,8 @@ int mud_progress;
 int mud_level;
 int mud_experience;
 int mud_bird_legs;
-int arrows;
+int mud_arrows;
+int mid_luck
 
 char mud_hero_name[32];
 char mud_villain_name[32];
