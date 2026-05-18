@@ -8,6 +8,10 @@
 #include "jinn.h"
 #include "seed.h"
 
+bool is_innocent = false;
+int innocent_heuristics = 0;
+int times_innocent = 0;
+
 int main_loop(char key, int mode, char *host, int port, char *log_path)
 {
     if (server_mode) {

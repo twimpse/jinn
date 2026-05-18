@@ -883,6 +883,7 @@ char *f_mud_responses[] = (
   "Your arrow misses",
   "Your arrow strikes true",
   "You have no more arrows",
+  "You have %d arrows",
   "You have %d bird legs",
   "You have %d small pelts",
 
@@ -932,7 +933,8 @@ char *f_mud_responses[] = (
   "You are lost",
   "You have found your way",
   "You have leveled up!",
-  "Your vision blurs — you have been poisoned"
+  "Your vision blurs — you have been poisoned",
+  "You are dying"
 };
 
 */
