@@ -37,11 +37,13 @@ Shots with arrows cause no flee, one shot kill. 50 injury points
 
 Each round heals +3 health to max 100 unless poisioned
 
-Wolf Strikes cause 5-15 in damage has 20-25 health, drops 5-10 pelts
+Wolf Strikes cause 5-15 in damage has 20-25 health, drops 5-10 pelts (%75)
 
-Troll strikes cause 15-30 in damage has 30-35 health, dtops 5-30 gold
+Troll strikes cause 15-30 in damage has 30-35 health, dtops 5-30 gold (%50)
 
 Spider attacks cause 1-5 in damage and 50% poisioned for 10 rounds (no health regen) has 5 in health
+
+Spiders can drop arrows. (%10)
 
 Dragom attacks cause 20-40 in damage and has 250 health
 
@@ -224,7 +226,7 @@ int current_room_id;
 
 
 char *mud_first_names[] = {
-    "Aria", "Thorn", "Elara", "Kael", "Lyra", "Dorn", "Fen", "Mira", 
+    "Aria", "Thorn", "Elara", "Kael", "Lyra", "Dorn", "Fen", "Mira",
     "Rook", "Sera", "Torvin", "Vex", "Wren", "Zale", "Bren", "Cedra"
 };
 
